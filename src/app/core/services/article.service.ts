@@ -34,4 +34,8 @@ export class ArticleService {
   updateArticle(id: number, article: Partial<Article>) {
     return this.http.put<ApiResponse<Article>>(`${this.api}/${id}`, article);
   }
+
+  softDeleteArticle(id: number) {
+    return this.http.delete<ApiResponse<Article>>(`${this.api}/${id}`);
+  }
 }

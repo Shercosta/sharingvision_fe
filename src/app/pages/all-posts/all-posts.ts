@@ -39,4 +39,17 @@ export class AllPosts implements OnInit {
       this.total.set(res.pagination.total);
     });
   }
+
+  makeItTrash(id: number) {
+    console.log('pass delete', id);
+
+    this.articleService.softDeleteArticle(id).subscribe({
+      next: () => {
+        this.loadArticles();
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
 }
