@@ -1,1 +1,11 @@
-<h2>Edit Post</h2>
+@if (article(); as article) {
+  <h1 class="mb-6 text-3xl font-bold">Edit Article</h1>
+
+  <p><strong>Title:</strong> {{ article.title }}</p>
+
+  <p><strong>Category:</strong> {{ article.category }}</p>
+
+  <p class="mt-4">
+    {{ article.content }}
+  </p>
+}

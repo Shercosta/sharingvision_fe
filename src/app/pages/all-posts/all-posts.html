@@ -13,6 +13,44 @@
     </a>
   </div>
 
+  <!-- Tabs -->
+  <div class="mb-4 flex border-b border-gray-200">
+    <div class="mb-4 flex border-b border-gray-200">
+      <button
+        class="border-b-2 px-5 py-3 font-medium transition"
+        [class.border-blue-600]="activeTab === ArticleStatus.PUBLISH"
+        [class.text-blue-600]="activeTab === ArticleStatus.PUBLISH"
+        [class.border-transparent]="activeTab !== ArticleStatus.PUBLISH"
+        [class.text-gray-500]="activeTab !== ArticleStatus.PUBLISH"
+        (click)="setTab(ArticleStatus.PUBLISH)"
+      >
+        Published
+      </button>
+
+      <button
+        class="border-b-2 px-5 py-3 font-medium transition"
+        [class.border-blue-600]="activeTab === ArticleStatus.DRAFT"
+        [class.text-blue-600]="activeTab === ArticleStatus.DRAFT"
+        [class.border-transparent]="activeTab !== ArticleStatus.DRAFT"
+        [class.text-gray-500]="activeTab !== ArticleStatus.DRAFT"
+        (click)="setTab(ArticleStatus.DRAFT)"
+      >
+        Draft
+      </button>
+
+      <button
+        class="border-b-2 px-5 py-3 font-medium transition"
+        [class.border-blue-600]="activeTab === ArticleStatus.TRASH"
+        [class.text-blue-600]="activeTab === ArticleStatus.TRASH"
+        [class.border-transparent]="activeTab !== ArticleStatus.TRASH"
+        [class.text-gray-500]="activeTab !== ArticleStatus.TRASH"
+        (click)="setTab(ArticleStatus.TRASH)"
+      >
+        Trashed
+      </button>
+    </div>
+  </div>
+
   <div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
     <table class="min-w-full divide-y divide-gray-200">
       <thead class="bg-gray-50">
@@ -20,6 +58,8 @@
           <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Title</th>
 
           <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Category</th>
+
+          <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Action</th>
         </tr>
       </thead>
 
@@ -37,10 +77,20 @@
                 {{ article.category }}
               </span>
             </td>
+
+            <td class="px-6 py-4">
+              <button class="mr-3 text-blue-600 hover:text-blue-800">
+                <mat-icon>edit</mat-icon>
+              </button>
+
+              <button class="text-red-600 hover:text-red-800">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
           </tr>
         } @empty {
           <tr>
-            <td colspan="2" class="px-6 py-10 text-center text-gray-500">No articles found.</td>
+            <td colspan="3" class="px-6 py-10 text-center text-gray-500">No articles found.</td>
           </tr>
         }
       </tbody>
