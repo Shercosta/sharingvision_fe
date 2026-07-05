@@ -1,11 +1,77 @@
-@if (article(); as article) {
-  <h1 class="mb-6 text-3xl font-bold">Edit Article</h1>
+<div class="mx-auto max-w-4xl p-8">
+  @if (article(); as article) {
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-gray-900">Edit Article</h1>
+      <p class="mt-2 text-gray-500">Update your article and save it as a draft or publish it.</p>
+    </div>
 
-  <p><strong>Title:</strong> {{ article.title }}</p>
+    <form class="space-y-6">
+      <!-- Title -->
+      <div>
+        <label for="title" class="mb-2 block text-sm font-medium text-gray-700"> Title </label>
 
-  <p><strong>Category:</strong> {{ article.category }}</p>
+        <input
+          id="title"
+          type="text"
+          [(ngModel)]="article.title"
+          name="title"
+          class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+          placeholder="Article title"
+        />
+      </div>
 
-  <p class="mt-4">
-    {{ article.content }}
-  </p>
-}
+      <!-- Category -->
+      <div>
+        <label for="category" class="mb-2 block text-sm font-medium text-gray-700">
+          Category
+        </label>
+
+        <input
+          id="category"
+          type="text"
+          [(ngModel)]="article.category"
+          name="category"
+          class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+          placeholder="Category"
+        />
+      </div>
+
+      <!-- Content -->
+      <div>
+        <label for="content" class="mb-2 block text-sm font-medium text-gray-700"> Content </label>
+
+        <textarea
+          id="content"
+          rows="12"
+          [(ngModel)]="article.content"
+          name="content"
+          class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+          placeholder="Write your article..."
+        ></textarea>
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex items-center justify-end gap-3 border-t pt-6">
+        <button
+          type="button"
+          (click)="saveDraft()"
+          class="rounded-lg border border-gray-300 px-6 py-2.5 font-medium text-gray-700 transition hover:bg-gray-100"
+        >
+          Save as Draft
+        </button>
+
+        <button
+          type="button"
+          (click)="publishArticle()"
+          class="rounded-lg bg-blue-600 px-6 py-2.5 font-medium text-white transition hover:bg-blue-700"
+        >
+          Publish
+        </button>
+      </div>
+    </form>
+  } @else {
+    <div class="rounded-lg border border-gray-200 bg-white p-8 text-center shadow-sm">
+      <p class="text-gray-500">Loading article...</p>
+    </div>
+  }
+</div>

@@ -79,7 +79,10 @@
             </td>
 
             <td class="px-6 py-4">
-              <button class="mr-3 text-blue-600 hover:text-blue-800">
+              <button
+                class="mr-3 text-blue-600 hover:text-blue-800"
+                [routerLink]="['/posts/edit', article.id]"
+              >
                 <mat-icon>edit</mat-icon>
               </button>
 

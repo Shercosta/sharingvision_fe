@@ -3,11 +3,12 @@ import { ArticleService } from '../../core/services/article.service';
 import { Article, ArticleStatus } from '../../core/models/article.model';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-all-posts',
   standalone: true,
-  imports: [CommonModule, MatIconModule],
+  imports: [CommonModule, MatIconModule, RouterLink],
   templateUrl: './all-posts.html',
   styleUrl: './all-posts.css',
 })
