@@ -1,3 +1,34 @@
+# How to Run the Application
+
+## Prerequisites
+
+- Install Node.js (v20 or later recommended).
+- Ensure the backend API is running before starting the frontend.
+
+## Installation
+
+```bash
+npm install
+```
+
+## Start the Development Server
+
+```bash
+ng serve
+```
+
+Alternatively, if Angular CLI is not installed globally:
+
+```bash
+npx ng serve
+```
+
+## Open the Application
+
+Once the server starts, open:
+
+http://localhost:4200/
+
 # Fe
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.18.
