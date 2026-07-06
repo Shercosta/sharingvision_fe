@@ -66,7 +66,7 @@ export class Preview implements OnInit {
     const value = +(event.target as HTMLSelectElement).value;
 
     this.limit.set(value);
-    this.offset.set(0); // Go back to first page
+    this.offset.set(0);
     this.loadArticles();
   }
 }
