@@ -13,3 +13,10 @@ export interface Article {
   created_date: string;
   updated_date: string;
 }
+
+export interface ComposeArticle {
+  title: string;
+  content: string;
+  category: string;
+  status: ArticleStatus;
+}

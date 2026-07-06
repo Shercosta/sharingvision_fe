@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Article, ArticleStatus } from '../models/article.model';
+import { Article, ArticleStatus, ComposeArticle } from '../models/article.model';
 import { environment } from '../../../environments/environment';
 import { PaginatedResponse } from '../models/paginated-response.model';
 import { ApiResponse } from '../models/api-response.mode';
@@ -37,5 +37,9 @@ export class ArticleService {
 
   softDeleteArticle(id: number) {
     return this.http.delete<ApiResponse<Article>>(`${this.api}/${id}`);
+  }
+
+  createArticle(article: ComposeArticle) {
+    return this.http.post<ApiResponse<Article>>(`${this.api}`, article);
   }
 }

@@ -1,1 +1,35 @@
 <h2>Add New Post</h2>
+
+@if (article(); as article) {
+  <form>
+    <!-- title -->
+    <label for="title">Title</label>
+    <input type="text" id="title" name="title" [(ngModel)]="article.title" />
+
+    <!-- category -->
+    <label for="category">category</label>
+    <input type="text" id="category" name="category" [(ngModel)]="article.category" />
+
+    <!-- content -->
+    <label for="content">content</label>
+    <textarea name="content" id="content" [(ngModel)]="article.content"></textarea>
+
+    <div class="flex items-center justify-end gap-3 border-t pt-6">
+      <button
+        type="button"
+        (click)="saveDraft()"
+        class="rounded-lg border border-gray-300 px-6 py-2.5 font-medium text-gray-700 transition hover:bg-gray-100"
+      >
+        Save as Draft
+      </button>
+
+      <button
+        type="button"
+        (click)="publishArticle()"
+        class="rounded-lg bg-blue-600 px-6 py-2.5 font-medium text-white transition hover:bg-blue-700"
+      >
+        Publish
+      </button>
+    </div>
+  </form>
+}
