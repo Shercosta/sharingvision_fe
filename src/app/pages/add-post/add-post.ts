@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ArticleService } from '../../core/services/article.service';
 import { Article, ArticleStatus, ComposeArticle } from '../../core/models/article.model';
 
@@ -13,7 +13,7 @@ import { Article, ArticleStatus, ComposeArticle } from '../../core/models/articl
   standalone: true,
 })
 export class AddPost {
-  private route = inject(ActivatedRoute);
+  private router = inject(Router);
   private articleService = inject(ArticleService);
 
   article = signal<ComposeArticle>({
@@ -42,6 +42,7 @@ export class AddPost {
       .subscribe({
         next: (res) => {
           console.log(res);
+          this.router.navigate(['/posts']);
         },
         error: (err) => {
           console.error(err);

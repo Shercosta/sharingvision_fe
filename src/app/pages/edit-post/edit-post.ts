@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ArticleService } from '../../core/services/article.service';
 import { Article, ArticleStatus } from '../../core/models/article.model';
@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 export class EditPost implements OnInit {
   private route = inject(ActivatedRoute);
   private articleService = inject(ArticleService);
+  private router = inject(Router);
 
   article = signal<Article | null>(null);
 
@@ -49,6 +50,7 @@ export class EditPost implements OnInit {
       .subscribe({
         next: (res) => {
           console.log('updated', res);
+          this.router.navigate(['/posts']);
         },
         error: (err) => {
           console.error(err);
