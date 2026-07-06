@@ -1,80 +1,125 @@
-<h2>Preview Page</h2>
-
-<div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
-  <table class="min-w-full divide-y divide-gray-200">
-    <thead class="bg-gray-50">
-      <tr>
-        <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Title</th>
-
-        <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Category</th>
-        <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Content</th>
-      </tr>
-    </thead>
-
-    <tbody class="divide-y divide-gray-100 bg-white">
-      @for (article of articles(); track article.id) {
-        <tr class="transition hover:bg-gray-50">
-          <td class="px-6 py-4">
-            <p class="font-medium text-gray-900">
-              {{ article.title }}
-            </p>
-          </td>
-
-          <td class="px-6 py-4">
-            <span class="rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-700">
-              {{ article.category }}
-            </span>
-          </td>
-          <td class="px-6 py-4">
-            <span class="font-medium text-gray-500"> {{ article.content.slice(0, 50) }}... </span>
-          </td>
-        </tr>
-      } @empty {
-        <tr>
-          <td colspan="3" class="px-6 py-10 text-center text-gray-500">No articles found.</td>
-        </tr>
-      }
-    </tbody>
-  </table>
-
-  <div class="flex items-center justify-between border-t border-gray-200 bg-white px-6 py-4">
-    <button
-      (click)="previousPage()"
-      [disabled]="!hasPreviousPage()"
-      class="rounded border px-4 py-2 disabled:cursor-not-allowed disabled:opacity-50"
-    >
-      Previous
-    </button>
-
-    <span class="text-sm text-gray-600"> Page {{ currentPage() }} of {{ totalPages() }} </span>
-
-    <button
-      (click)="nextPage()"
-      [disabled]="!hasNextPage()"
-      class="rounded border px-4 py-2 disabled:cursor-not-allowed disabled:opacity-50"
-    >
-      Next
-    </button>
+<div class="mx-auto mt-10 max-w-7xl">
+  <!-- Header -->
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900">Published Articles</h1>
+    <p class="mt-2 text-gray-500">Browse all published articles available on the website.</p>
   </div>
 
-  <div class="mb-4 flex items-center justify-between">
-    <div class="flex items-center gap-2">
-      <label for="limit" class="text-sm text-gray-600"> Rows per page </label>
+  <!-- Table Card -->
+  <div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-gray-50">
+        <tr>
+          <th
+            class="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wide text-gray-600"
+          >
+            Title
+          </th>
 
-      <select
-        id="limit"
-        [value]="limit()"
-        (change)="changeLimit($event)"
-        class="rounded-lg border border-gray-300 px-3 py-2"
-      >
-        <option [value]="2">2</option>
-        <option [value]="5">5</option>
-        <option [value]="10">10</option>
-        <option [value]="20">20</option>
-        <option [value]="50">50</option>
-      </select>
+          <th
+            class="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wide text-gray-600"
+          >
+            Category
+          </th>
+
+          <th
+            class="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wide text-gray-600"
+          >
+            Preview
+          </th>
+        </tr>
+      </thead>
+
+      <tbody class="divide-y divide-gray-100 bg-white">
+        @for (article of articles(); track article.id) {
+          <tr class="transition hover:bg-blue-50/40">
+            <td class="px-6 py-5">
+              <p class="font-semibold text-gray-900">
+                {{ article.title }}
+              </p>
+            </td>
+
+            <td class="px-6 py-5">
+              <span
+                class="inline-flex rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700"
+              >
+                {{ article.category }}
+              </span>
+            </td>
+
+            <td class="max-w-md px-6 py-5">
+              <p class="line-clamp-2 text-sm leading-6 text-gray-600">
+                {{ article.content }}
+              </p>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="3" class="px-6 py-16 text-center">
+              <div class="flex flex-col items-center gap-2">
+                <div class="text-5xl">📝</div>
+
+                <p class="font-medium text-gray-700">No articles found</p>
+
+                <p class="text-sm text-gray-500">There are currently no published articles.</p>
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    <!-- Footer -->
+    <div
+      class="flex flex-col gap-4 border-t border-gray-200 bg-gray-50 px-6 py-4 md:flex-row md:items-center md:justify-between"
+    >
+      <!-- Rows per page -->
+      <div class="flex items-center gap-3">
+        <label for="limit" class="text-sm font-medium text-gray-600"> Rows per page </label>
+
+        <select
+          id="limit"
+          [value]="limit()"
+          (change)="changeLimit($event)"
+          class="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+        >
+          <!-- Dev -->
+          <option [value]="2">2</option>
+
+          <option [value]="5">5</option>
+          <option [value]="10">10</option>
+          <option [value]="20">20</option>
+          <option [value]="50">50</option>
+        </select>
+
+        <span class="text-sm text-gray-500"> {{ total() }} total articles </span>
+      </div>
+
+      <!-- Pagination -->
+      <div class="flex items-center gap-4">
+        <button
+          (click)="previousPage()"
+          [disabled]="!hasPreviousPage()"
+          class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium transition hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          ← Previous
+        </button>
+
+        <span class="text-sm font-medium text-gray-600">
+          Page
+          <span class="font-bold text-gray-900">{{ currentPage() }}</span>
+          of
+          <span class="font-bold text-gray-900">{{ totalPages() }}</span>
+        </span>
+
+        <button
+          (click)="nextPage()"
+          [disabled]="!hasNextPage()"
+          class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-blue-300"
+        >
+          Next →
+        </button>
+      </div>
     </div>
-
-    <span class="text-sm text-gray-600"> {{ total() }} articles </span>
   </div>
 </div>
